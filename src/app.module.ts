@@ -15,7 +15,7 @@ import { DashboardModule } from "./dashboard/dashboard.module";
       type: "sqlite",
       database: "simcard.sqlite",
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true,
+      synchronize: false,
     }),
     SimTypeModule,
     CustomerModule,
