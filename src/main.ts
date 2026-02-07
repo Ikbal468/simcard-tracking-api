@@ -22,7 +22,8 @@ async function bootstrap() {
     process.env.ALLOWED_ORIGINS || "http://localhost:4200,http://127.0.0.1:4200"
   ).split(",");
   app.enableCors({
-    origin: "*",
+    // origin: "*",    // For localhost purposes only
+    origin: ['https://simcard-tracking.netlify.app'],
   });
   await app.listen(process.env.PORT ? Number(process.env.PORT) : 3000);
   console.log("SimCard Tracking API started on port", process.env.PORT || 3000);
