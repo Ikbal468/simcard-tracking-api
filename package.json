@@ -1,0 +1,32 @@
+{
+  "name": "simcard-tracking-api",
+  "version": "0.1.0",
+  "scripts": {
+    "start:dev": "ts-node -r tsconfig-paths/register src/main.ts",
+    "build": "nest build",
+    "start": "node dist/main.js",
+    "start:prod": "node dist/main.js",
+    "seed": "node scripts/seed.js"
+  },
+  "dependencies": {
+    "@nestjs/common": "^9.0.0",
+    "@nestjs/core": "^9.0.0",
+    "@nestjs/platform-express": "^9.0.0",
+    "@nestjs/swagger": "^6.0.0",
+    "@nestjs/typeorm": "^9.0.0",
+    "bcryptjs": "^2.4.3",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.0",
+    "jsonwebtoken": "^9.0.2",
+    "reflect-metadata": "^0.1.13",
+    "sqlite3": "^5.0.0",
+    "swagger-ui-express": "^4.6.3",
+    "typeorm": "^0.3.17",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "ts-node": "^10.0.0",
+    "tsconfig-paths": "^4.0.0",
+    "typescript": "^4.9.5"
+  }
+}
