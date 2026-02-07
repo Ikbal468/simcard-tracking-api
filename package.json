@@ -2,11 +2,11 @@
   "name": "simcard-tracking-api",
   "version": "0.1.0",
   "engines": {
-    "node": "18.12.0"
+    "node": "18.x"
   },
   "scripts": {
     "start:dev": "ts-node -r tsconfig-paths/register src/main.ts",
-    "build": "npx nest build",
+    "build": "tsc",
     "start": "node dist/main.js",
     "start:prod": "node dist/main.js",
     "seed": "node scripts/seed.js"
