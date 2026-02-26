@@ -6,10 +6,12 @@ import { SimCard } from "../entities/sim-card.entity";
 import { SimTransaction } from "../entities/sim-transaction.entity";
 import { SimType } from "../entities/sim-type.entity";
 import { Customer } from "../entities/customer.entity";
+import { AuthModule } from "../auth/auth.module";
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([SimCard, SimTransaction, SimType, Customer]),
+    AuthModule,
   ],
   providers: [DashboardService],
   controllers: [DashboardController],

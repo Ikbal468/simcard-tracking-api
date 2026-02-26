@@ -8,13 +8,15 @@ import { SimTransactionModule } from "./transactions/sim-transaction.module";
 import { UsersModule } from "./users/users.module";
 import { AuthModule } from "./auth/auth.module";
 import { DashboardModule } from "./dashboard/dashboard.module";
+import { join } from "path";
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: "sqlite",
-      database: "simcard.sqlite",
+      database: join(process.cwd(), "db", "simcard.sqlite"),
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      migrations: [__dirname + '/migrations/*{.ts,.js}'],
       synchronize: false,
     }),
     SimTypeModule,

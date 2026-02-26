@@ -10,6 +10,7 @@ import {
   UseInterceptors,
   UploadedFile,
   BadRequestException,
+  UseGuards,
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { memoryStorage } from "multer";
@@ -18,17 +19,23 @@ import { CreateSimCardDto } from "./dto/create-sim-card.dto";
 import { UpdateSimCardDto } from "./dto/update-sim-card.dto";
 import { PaginationDto } from "./dto/pagination.dto";
 import { ChangeCustomerDto } from "./dto/change-customer.dto";
+import { AuthGuard } from "../auth/guards/auth.guard";
+import { PermissionsGuard } from "../auth/guards/permissions.guard";
+import { RequirePermission } from "../auth/decorators/permissions.decorator";
 
 @Controller("simCards")
+@UseGuards(AuthGuard, PermissionsGuard)
 export class SimCardController {
   constructor(private readonly svc: SimCardService) {}
 
   @Post()
+  @RequirePermission("simcards", "create")
   create(@Body() body: CreateSimCardDto) {
     return this.svc.create(body as any);
   }
 
   @Post("import")
+  @RequirePermission("simcards", "create")
   @UseInterceptors(
     FileInterceptor("file", {
       storage: memoryStorage(),
@@ -59,11 +66,13 @@ export class SimCardController {
   }
 
   @Get()
+  @RequirePermission("simcards", "view")
   list() {
     return this.svc.findAll();
   }
 
   @Post("paginate")
+  @RequirePermission("simcards", "view")
   paginate(@Body() body: PaginationDto) {
     const page = body?.page ?? 1;
     const limit = body?.limit ?? 10;
@@ -71,16 +80,19 @@ export class SimCardController {
   }
 
   @Get("summary")
+  @RequirePermission("simcards", "view")
   summary() {
     return this.svc.summary();
   }
 
   @Get(":id")
+  @RequirePermission("simcards", "view")
   one(@Param("id") id: string) {
     return this.svc.findOne(Number(id));
   }
 
   @Patch(":id")
+  @RequirePermission("simcards", "edit")
   update(
     @Param("id", ParseIntPipe) id: number,
     @Body() body: UpdateSimCardDto,
@@ -89,6 +101,7 @@ export class SimCardController {
   }
 
   @Patch(":id/change-customer")
+  @RequirePermission("simcards", "edit")
   changeCustomer(
     @Param("id", ParseIntPipe) id: number,
     @Body() body: ChangeCustomerDto,
@@ -97,6 +110,7 @@ export class SimCardController {
   }
 
   @Delete(":id")
+  @RequirePermission("simcards", "delete")
   remove(@Param("id", ParseIntPipe) id: number) {
     return this.svc.remove(id);
   }

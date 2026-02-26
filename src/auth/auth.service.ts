@@ -21,11 +21,20 @@ export class AuthService {
   async login(username: string, password: string) {
     const user = await this.validateUser(username, password);
     if (!user) throw new UnauthorizedException("Invalid credentials");
-    const payload = { sub: user.id, username: user.username, role: user.role };
+    const payload = {
+      sub: user.id,
+      username: user.username,
+      role: user.role?.name || "operator",
+    };
     const token = jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
     return {
       access_token: token,
-      user: { id: user.id, username: user.username, role: user.role },
+      user: {
+        id: user.id,
+        username: user.username,
+        role: user.role?.name || "operator",
+        permissions: user.role?.permissions || [],
+      },
     };
   }
 }

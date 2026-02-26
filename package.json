@@ -9,7 +9,9 @@
     "build": "tsc",
     "start": "node dist/main.js",
     "start:prod": "node dist/main.js",
-    "seed": "node scripts/seed.js"
+    "seed": "node scripts/seed.js",
+    "migration:generate": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:generate src/migrations/AutoMigration -d src/data-source.ts",
+    "migration:run": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d src/data-source.ts"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
@@ -25,7 +27,8 @@
     "sqlite3": "^5.0.0",
     "swagger-ui-express": "^4.6.3",
     "typeorm": "^0.3.17",
-    "xlsx": "^0.18.5"
+    "xlsx": "^0.18.5",
+    "dotenv": "^16.0.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^11.0.16",

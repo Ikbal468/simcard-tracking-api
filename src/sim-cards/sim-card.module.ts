@@ -7,11 +7,13 @@ import { SimType } from "../entities/sim-type.entity";
 import { SimCardService } from "./sim-card.service";
 import { SimCardController } from "./sim-card.controller";
 import { SimTypeModule } from "../sim-types/sim-type.module";
+import { AuthModule } from "../auth/auth.module";
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([SimCard, SimTransaction, Customer, SimType]),
     SimTypeModule,
+    AuthModule,
   ],
   providers: [SimCardService],
   controllers: [SimCardController],

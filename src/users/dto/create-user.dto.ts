@@ -1,4 +1,5 @@
-import { IsString, IsNotEmpty, IsIn } from "class-validator";
+import { IsString, IsNotEmpty, IsInt, IsOptional } from "class-validator";
+import { Type } from "class-transformer";
 
 export class CreateUserDto {
   @IsString()
@@ -9,7 +10,8 @@ export class CreateUserDto {
   @IsNotEmpty()
   password: string;
 
-  @IsString()
-  @IsIn(["admin", "operator"])
-  role: string;
+  @IsOptional()
+  @IsInt()
+  @Type(() => Number)
+  roleId?: number;
 }
