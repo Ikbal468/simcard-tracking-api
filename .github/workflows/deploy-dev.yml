@@ -1,4 +1,4 @@
-name: Deploy to aaPanel Dev Server
+name: Deploy to Render Dev Server
 
 on:
   push:
