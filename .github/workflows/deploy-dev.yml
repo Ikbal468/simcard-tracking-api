@@ -1,4 +1,4 @@
-name: Deploy to Render Dev Server
+name: Deploy to aaPanel Dev Server
 
 on:
   push:
@@ -24,11 +24,12 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Run migrations
-        run: npm run migration:run
-        continue-on-error: true
-
-      - name: Restart app with PM2
+      - name: Replace dist in aaPanel directory
         run: |
-          pm2 restart simcard-tracking-api-dev 
+          rm -rf /www/wwwroot/sim-managed-api/dist
+          cp -r dist /www/wwwroot/sim-managed-api/
+
+      - name: Reload PM2
+        run: |
+          pm2 reload sim-managed-api
           pm2 save
