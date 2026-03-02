@@ -25,9 +25,11 @@ jobs:
         run: npm run build
 
       - name: Replace dist in aaPanel directory
-        run: |
-          rm -rf /www/wwwroot/sim-managed-api/dist
-          cp -r dist /www/wwwroot/sim-managed-api/
+  run: |
+    if (Test-Path "C:\www\wwwroot\sim-managed-api\dist") {
+      Remove-Item "C:\www\wwwroot\sim-managed-api\dist" -Recurse -Force
+    }
+    Copy-Item "dist" "C:\www\wwwroot\sim-managed-api" -Recurse
 
       - name: Reload PM2
         run: |
