@@ -2,6 +2,30 @@ import { MigrationInterface, QueryRunner } from "typeorm";
 
 export class ConvertUserRoleToRoleId1700000000000 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
+    // Check if users table exists before attempting migration
+    const tables = await queryRunner.query(
+      `SELECT name FROM sqlite_master WHERE type='table' AND name='users'`,
+    );
+
+    if (!tables || tables.length === 0) {
+      console.log(
+        "Users table does not exist yet. Skipping ConvertUserRoleToRoleId migration.",
+      );
+      return;
+    }
+
+    // Check if roles table exists
+    const rolesTables = await queryRunner.query(
+      `SELECT name FROM sqlite_master WHERE type='table' AND name='roles'`,
+    );
+
+    if (!rolesTables || rolesTables.length === 0) {
+      console.log(
+        "Roles table does not exist yet. Skipping ConvertUserRoleToRoleId migration.",
+      );
+      return;
+    }
+
     // Find distinct role strings in users (legacy denormalized column)
     const rows: Array<{ role: string }> = await queryRunner.query(
       `SELECT DISTINCT role FROM users WHERE role IS NOT NULL AND role != ''`,
