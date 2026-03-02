@@ -1,0 +1,40 @@
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Database
+simcard.sqlite
+db/*.sqlite
+*.db
+
+# PM2 logs
+logs/
+*.log
+.pm2/
+
+# GitHub Actions runner
+actions-runner/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test coverage
+coverage/
+
+# TypeScript
+*.tsbuildinfo

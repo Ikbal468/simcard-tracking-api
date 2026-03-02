@@ -1,0 +1,35 @@
+name: Deploy to aaPanel Dev Server
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Run migrations
+        run: npm run migration:run
+        continue-on-error: true
+
+      - name: Restart app with PM2
+        run: |
+          pm2 restart simcard-tracking-api-dev || \
+          pm2 start dist/main.js --name simcard-tracking-api-dev
+          pm2 save

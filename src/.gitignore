@@ -1,0 +1,4 @@
+# simcard.sqlite
+.env
+dist
+node_modules
