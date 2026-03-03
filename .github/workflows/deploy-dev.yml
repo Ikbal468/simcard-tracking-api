@@ -35,4 +35,5 @@ jobs:
       - name: Restart PM2
         run: |
           cd /www/wwwroot/sim-managed-api
-          pm2 restart sim-managed-api || pm2 start dist/main.js --name sim-managed-api
+          sudo -u www pm2 restart sim-managed-api || \
+          sudo -u www pm2 start dist/main.js --name sim-managed-api
