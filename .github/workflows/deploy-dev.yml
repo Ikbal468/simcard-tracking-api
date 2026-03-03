@@ -24,10 +24,7 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Stop PM2
-        run: pm2 stop sim-managed-api || true
-
-      - name: Copy build to project directory
+      - name: Deploy dist
         run: |
           rsync -av --delete ./dist/ /www/wwwroot/sim-managed-api/dist/
           rsync -av ./package.json /www/wwwroot/sim-managed-api/
