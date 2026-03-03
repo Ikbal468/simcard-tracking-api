@@ -24,18 +24,10 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Deploy to project directory
+      - name: Copy build to project directory
         run: |
-          rsync -av --delete \
-            --exclude='.git' \
-            --exclude='node_modules' \
-            --exclude='.env' \
-            ./ /www/wwwroot/sim-managed-api/
-
-      - name: Install production dependencies
-        run: |
-          cd /www/wwwroot/sim-managed-api
-          npm install --production
+          rm -rf /www/wwwroot/sim-managed-api/*
+          cp -r . /www/wwwroot/sim-managed-api/
 
       - name: Restart PM2
         run: |
