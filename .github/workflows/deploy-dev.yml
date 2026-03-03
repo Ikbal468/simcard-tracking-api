@@ -27,7 +27,7 @@ jobs:
       - name: Copy build to project directory
         run: |
           rm -rf /www/wwwroot/sim-managed-api/*
-          cp -r . /www/wwwroot/sim-managed-api/
+          rsync -av --exclude='.git' ./ /www/wwwroot/sim-managed-api/
 
       - name: Restart PM2
         run: |
