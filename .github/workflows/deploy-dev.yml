@@ -26,8 +26,9 @@ jobs:
 
       - name: Copy build to project directory
         run: |
-          rm -rf /www/wwwroot/sim-managed-api/*
-          rsync -av --exclude='.git' ./ /www/wwwroot/sim-managed-api/
+          sudo chown -R github-runner:github-runner /www/wwwroot/sim-managed-api
+          rsync -av --delete ./dist/ /www/wwwroot/sim-managed-api/dist/
+          rsync -av ./package.json /www/wwwroot/sim-managed-api/
 
       - name: Restart PM2
         run: |
