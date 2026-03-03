@@ -30,7 +30,7 @@ async function bootstrap() {
 
   await app.listen(process.env.PORT ? Number(process.env.PORT) : 3000);
   console.log("SimCard Tracking API started on port", process.env.PORT || 3000);
-  
+  console.log("testing");
 }
 
 bootstrap();
