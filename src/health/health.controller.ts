@@ -5,6 +5,6 @@ export class HealthController {
   @Get()
   check() {
     console.log('Health endpoint hit!');
-    return { version: '1.0.3', status: 'ok' };
+    return { version: '1.0.4', status: 'ok' };
   }
 }
