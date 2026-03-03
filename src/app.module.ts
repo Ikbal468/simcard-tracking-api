@@ -8,6 +8,7 @@ import { SimTransactionModule } from "./transactions/sim-transaction.module";
 import { UsersModule } from "./users/users.module";
 import { AuthModule } from "./auth/auth.module";
 import { DashboardModule } from "./dashboard/dashboard.module";
+import { HealthModule } from "./health/health.module";
 import { join } from "path";
 
 @Module({
@@ -15,8 +16,8 @@ import { join } from "path";
     TypeOrmModule.forRoot({
       type: "sqlite",
       database: join(process.cwd(), "db", "simcard.sqlite"),
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      migrations: [__dirname + '/migrations/*{.ts,.js}'],
+      entities: [__dirname + "/**/*.entity{.ts,.js}"],
+      migrations: [__dirname + "/migrations/*{.ts,.js}"],
       synchronize: false,
     }),
     SimTypeModule,
@@ -26,6 +27,7 @@ import { join } from "path";
     DashboardModule,
     UsersModule,
     AuthModule,
+    HealthModule,
   ],
 })
 export class AppModule {}
