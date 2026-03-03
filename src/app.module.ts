@@ -16,8 +16,8 @@ import { join } from "path";
     TypeOrmModule.forRoot({
       type: "sqlite",
       database: join(process.cwd(), "db", "simcard.sqlite"),
-      entities: [__dirname + "/**/*.entity{.ts,.js}"],
-      migrations: [__dirname + "/migrations/*{.ts,.js}"],
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      migrations: [__dirname + '/migrations/*{.ts,.js}'],
       synchronize: false,
     }),
     SimTypeModule,
