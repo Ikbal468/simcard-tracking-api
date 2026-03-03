@@ -26,7 +26,7 @@ jobs:
 
       - name: Deploy dist
         run: |
-          rsync -av --delete --ignore-errors ./dist/ /www/wwwroot/sim-managed-api/dist/
+          rsync -av --delete ./dist/ /www/wwwroot/sim-managed-api/dist/
           rsync -av ./package.json /www/wwwroot/sim-managed-api/
 
       - name: Restart PM2
