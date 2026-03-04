@@ -29,10 +29,10 @@ jobs:
 
       - name: Deploy dist
         run: |
-          rsync -av --delete ./dist/ /home/github-runner/sim-managed-api/dist/ || true
-          rsync -av ./package.json /home/github-runner/sim-managed-api/ || true
+          rsync -av --delete ./dist/ /www/wwwroot/sim-managed-api/dist/ || true
+          rsync -av ./package.json /www/wwwroot/sim-managed-api/ || true
 
       - name: Restart PM2
         run: |
-          cd /home/github-runner/sim-managed-api
+          cd /www/wwwroot/sim-managed-api
           pm2 restart sim-managed-api || pm2 start dist/main.js --name sim-managed-api
